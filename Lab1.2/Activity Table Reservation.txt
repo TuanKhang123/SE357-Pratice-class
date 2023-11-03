@@ -1,0 +1,19 @@
+@startuml
+|Khách hàng|
+start
+: Xem thực đơn;
+: Chọn bàn và thời gian đặt;
+: Điền thông tin đặt bàn;
+|Hệ thống|
+: Xác nhận thông tin và tạo đặt bàn;
+note right
+  Lưu trữ thông tin đặt bàn
+  và cập nhật trạng thái bàn
+end note
+|Nhân viên|
+: Xác nhận và chuẩn bị bàn;
+|Khách hàng|
+: Nhận thông báo xác nhận đặt bàn;
+stop
+|Khách hàng| --> end
+@enduml

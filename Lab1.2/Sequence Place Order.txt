@@ -1,0 +1,18 @@
+@startuml
+title Đặt Đơn Hàng Sequence Diagram
+
+actor Customer as C
+boundary "Order UI" as OUI
+control "Order Controller" as OC
+entity "Menu Database" as MD
+entity "Chef" as CF
+
+C -> OUI: Xem thực đơn và chọn món ăn
+OUI -> OC: Yêu cầu đặt đơn hàng
+OC -> MD: Lấy thông tin món ăn
+MD --> OC: Thông tin món ăn
+OC -> CF: Yêu cầu chuẩn bị món ăn
+CF --> OC: Xác nhận đơn hàng đã chuẩn bị
+OC --> OUI: Xác nhận đặt đơn hàng thành công
+OUI --> C: Thông báo đặt hàng thành công
+@enduml

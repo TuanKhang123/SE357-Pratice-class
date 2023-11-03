@@ -1,0 +1,88 @@
+@startuml
+left to right direction
+
+"Khách hàng" as Customer
+"Đầu bếp" as Chef
+"Admin" as Admin
+"Nhân viên" as Employee
+
+rectangle "Hệ thống Hỗ Trợ Quản lý Nhà hàng" {
+
+rectangle "Nhân Viên" {
+Employee --> (Đăng nhập nhân viên) : include
+(Đăng nhập nhân viên) --> (Đăng xuất nhân viên)
+(Đăng nhập nhân viên) --> (Quản lý đặt bàn của khách)
+(Đăng nhập nhân viên) --> (Quản lý đơn hàng của khách)
+(Đăng nhập nhân viên) --> (Quản lý thực đơn)
+(Đăng nhập nhân viên) --> (Quản lý kho hàng)
+(Đăng nhập nhân viên) --> (Quản Lý Đánh Giá và Phản Hồi)
+
+
+(Quản lý đặt bàn của khách) --> (Thêm bàn)
+(Quản lý đặt bàn của khách) --> (Xóa bàn)
+(Quản lý đặt bàn của khách) --> (Sửa bàn)
+(Quản lý đặt bàn của khách) --> (Xem trạng thái bàn)
+
+(Quản lý đơn hàng của khách) --> (Tìm kiếm đơn hàng)
+(Quản lý đơn hàng của khách) --> (Xem chi tiết đơn hàng)
+(Quản lý đơn hàng của khách) --> (Tạo hóa đơn và phiếu vận chuyển)
+(Quản lý đơn hàng của khách) --> (Thống kê và báo cáo)
+(Quản lý đơn hàng của khách) --> (Xem danh sách đơn hàng)
+
+(Quản lý thực đơn) --> (Thêm thực đơn)
+(Quản lý thực đơn) --> (Phân loại)
+(Quản lý thực đơn) --> (Sửa thực đơn)
+(Quản lý thực đơn) --> (Xóa món ăn trong thực đơn)
+
+(Quản lý kho hàng) --> (Xem trạng thái)
+(Quản lý kho hàng) --> (Xem chi phí nhập)
+(Quản lý kho hàng) --> (Xem số lượng)
+
+(Quản Lý Đánh Giá và Phản Hồi) --> (Phản hồi đánh giá)
+(Quản Lý Đánh Giá và Phản Hồi) --> (Xem đánh giá)
+
+}
+
+rectangle "Đầu bếp" {
+Chef--> (Đăng nhập đầu bếp) : include
+(Đăng nhập đầu bếp) --> (Đăng xuất đầu bếp)
+(Đăng nhập đầu bếp) --> (Xác nhận việc chuẩn bị món ăn)
+(Đăng nhập đầu bếp) --> (Nhận đơn hàng)
+}
+
+rectangle "Khách hàng" {
+Customer--> (Đăng nhập) : include
+(Đăng nhập) --> (Xem thực đơn)
+(Đăng nhập) --> (Đăng xuất khách hàng)
+(Đăng nhập) --> (Quản lý thông tin cá nhân)
+(Đăng nhập) --> (Quản lý đơn hàng)
+(Đăng nhập) --> (Quản lý đặt bàn)
+
+(Quản lý đơn hàng) --> (Nhận ưu đãi)
+(Quản lý đơn hàng) --> (Đặt đơn hàng)
+(Quản lý đơn hàng) --> (Xem trạng thái đơn hàng)
+(Quản lý đơn hàng) --> (Xem lịch sử mua hàng)
+(Quản lý đơn hàng) --> (Đánh giá đơn hàng)
+(Quản lý đơn hàng) --> (Tương tác với chủ nhà hàng)
+(Quản lý đơn hàng) --> (Hủy đơn)
+
+(Quản lý đặt bàn) --> (Sửa thông tin)
+(Quản lý đặt bàn) --> (Hủy bàn)
+(Quản lý đặt bàn) --> (Đặt bàn)
+}
+
+rectangle "ADMIN" {
+Admin--> (Đăng nhập admin) : include
+(Đăng nhập admin) --> (Quản lý nhân viên)
+(Đăng nhập admin) --> (Quản lý doanh thu)
+
+(Quản lý nhân viên) --> (Quản lý thuế)
+(Quản lý nhân viên) --> (Theo dỗi giờ làm)
+(Quản lý nhân viên) --> (Phân quyền)
+(Quản lý nhân viên) --> (Tính lương)
+(Quản lý nhân viên) --> (Quản lý thông tin nhân viên)
+
+(Quản lý doanh thu) --> (Tạo báo cáo)
+}
+}
+@enduml
