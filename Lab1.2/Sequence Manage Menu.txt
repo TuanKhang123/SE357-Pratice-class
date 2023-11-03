@@ -1,0 +1,39 @@
+@startuml
+title Quản Lý Thực Đơn Sequence Diagram
+
+actor Admin as A
+boundary "Menu Management UI" as MMUI
+control "Menu Management Controller" as MMC
+entity "Menu Database" as MD
+
+A -> MMUI: Truy cập giao diện quản lý thực đơn
+MMUI -> MMC: Yêu cầu quản lý thực đơn
+MMC -> MD: Truy vấn thông tin thực đơn
+MD --> MMC: Thông tin thực đơn
+MMC --> MMUI: Hiển thị thông tin thực đơn
+MMUI --> A: Hiển thị thông tin thực đơn cho Admin
+
+A -> MMUI: Sửa thông tin thực đơn
+MMUI -> MMC: Yêu cầu sửa thực đơn
+MMC -> MD: Truy vấn thông tin thực đơn
+MD --> MMC: Thông tin thực đơn
+MMC --> MMUI: Hiển thị thông tin thực đơn để sửa
+
+A -> MMUI: Xóa món ăn khỏi thực đơn
+MMUI -> MMC: Yêu cầu xóa món ăn
+MMC -> MD: Xóa món ăn khỏi thực đơn
+MD --> MMC: Xác nhận xóa món ăn
+MMC --> MMUI: Hiển thị thông báo xóa thành công
+
+A -> MMUI: Phân loại thực đơn
+MMUI -> MMC: Yêu cầu phân loại thực đơn
+MMC -> MD: Thay đổi phân loại thực đơn
+MD --> MMC: Xác nhận thay đổi phân loại
+MMC --> MMUI: Hiển thị thông báo thay đổi thành công
+
+A -> MMUI: Thêm thực đơn mới
+MMUI -> MMC: Yêu cầu thêm thực đơn
+MMC -> MD: Thêm thực đơn vào cơ sở dữ liệu
+MD --> MMC: Xác nhận thêm thực đơn
+MMC --> MMUI: Hiển thị thông báo thêm thành công
+@enduml

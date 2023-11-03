@@ -1,0 +1,28 @@
+@startuml
+|Khách hàng|
+start
+: Xem thực đơn;
+: Chọn món ăn và số lượng;
+: Thêm món vào giỏ hàng;
+: Điền thông tin giao hàng;
+|Hệ thống|
+: Xác nhận thông tin đơn hàng;
+note right
+  Lưu trữ thông tin đơn hàng
+  và cập nhật tồn kho nếu cần
+end note
+|Nhân viên|
+: Kiểm tra và chuẩn bị đơn hàng;
+|Đầu bếp|
+: Nhận thông tin và bắt đầu nấu;
+note right
+  Chuẩn bị món ăn theo đơn hàng
+end note
+: Hoàn thành món và báo nhân viên;
+|Nhân viên|
+: Đóng gói và giao đơn hàng cho dịch vụ vận chuyển;
+|Khách hàng|
+: Nhận đơn hàng;
+stop
+|Khách hàng| --> end
+@enduml
