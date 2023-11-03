@@ -1,0 +1,50 @@
+@startuml
+|Nhân viên|
+start
+: Đăng nhập nhân viên;
+if (Đăng nhập thành công?) then (Có)
+  : Quản lý đặt bàn của khách;
+  if (Thực hiện quản lý đặt bàn của khách?) then (Có)
+    : Thêm bàn;
+    : Xoá bàn;
+    : Sửa bàn;
+    : Xem trạng thái bàn;
+  else (Không)
+    : Quản lý đơn hàng của khách;
+    if (Thực hiện quản lý đơn hàng của khách?) then (Có)
+      : Tìm kiếm đơn hàng;
+      : Xem chi tiết đơn hàng;
+      : Tạo hóa đơn và phiếu vận chuyển;
+      : Thống kê và báo cáo;
+      : Xem danh sách đơn hàng;
+    else (Không)
+      : Quản lý thực đơn;
+      if (Thực hiện quản lý thực đơn?) then (Có)
+        : Thêm thực đơn;
+        : Phân loại;
+        : Sửa thực đơn;
+        : Xoá món ăn trong thực đơn;
+      else (Không)
+        : Quản lý kho hàng;
+        if (Thực hiện quản lý kho hàng?) then (Có)
+          : Xem trạng thái;
+          : Xem chi phí nhập;
+          : Xem số lượng;
+        else (Không)
+          : Quản lý đánh giá và phản hồi;
+          if (Thực hiện quản lý đánh giá và phản hồi?) then (Có)
+            : Phản hồi đánh giá;
+            : Xem đánh giá;
+          else (Không)
+            : Tiếp tục hoặc thoát;
+          endif
+        endif
+      endif
+    endif
+  endif
+else (Không)
+  : Tiếp tục hoặc thoát;
+endif
+stop
+|Nhân viên| --> end
+@enduml
