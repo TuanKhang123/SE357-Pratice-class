@@ -1,0 +1,122 @@
+@startuml
+
+
+
+class Chef {
+    + ConfirmFoodPreparation()
+    + ReceiveOrder()
+}
+
+class Admin {
+    + ManageEmployees()
+    + ManageTaxes()
+    + MonitorWorkHours()
+    + ManageSalary()
+    + ManageRevenue()
+}
+
+class Employee {
+    + ManageTableReservations()
+    + ManageOrders()
+    + ManageMenu()
+    + ManageInventory()
+    + ManageReviewsAndFeedback()
+}
+
+class Customer {
+    + ReserveTable()
+    + PlaceOrder()
+    + ViewMenu()
+    + ViewOrderHistory()
+    + ReceivePromotion()
+}
+
+class Person {
+    - personID: int
+    - role: string
+    - username: string
+    - password: string
+    - contactInfo: string
+    + ManagePersonalInfo()
+}
+
+class Reservation {
+    - ReservationID: int
+    - FoodInfo : String
+    - Quantity : int
+    - OrderTime : Date
+    + ViewOrderStatus()
+    + ReviewOrder()
+    + CancelOrder()
+}
+
+class MenuItem {
+    - itemID : int
+    - ItemName : String
+    - Description : String
+    - Price : double
+    + AddItem()
+    + EditItem()
+    + DeleteItem()
+}
+
+class Order {
+    - OrderID : int
+    - FoodItems : List<MenuItem>
+    - OrderDate : Date
+    - TotalPrice : double
+    + CreateInvoiceAndShippingReceipt()
+    + GenerateStatisticsAndReports()
+}
+
+class Table {
+    - TableID : int
+    - TableNumber : int
+    - Status : String
+    + AddTable()
+    + RemoveTable()
+    + EditTable()
+    + ViewTableStatus()
+}
+
+class Inventory {
+    - ItemID : int
+    - ItemName : String
+    - Quantity : int
+    - CostPrice : double
+    + ViewInventoryStatus()
+    + ViewCostExpenses()
+    + ViewQuantity()
+}
+
+class Feedback {
+    - FeedbackID : int
+    - Content : String
+    - CreateDate : Date
+    + ReviewFeedback()
+    + ViewFeedback()
+}
+
+Customer --|> Person
+Chef --|> Person
+Employee --|> Person
+Admin --|> Person
+
+Admin -- Chef
+Admin -- Employee
+
+Chef -- Order
+
+Employee -- Table
+Employee -- Inventory
+Employee -- MenuItem
+Employee -- Reservation
+Employee -- Feedback
+
+Customer -- Reservation
+Customer -- MenuItem
+Customer -- Order
+Customer -- Feedback
+
+
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+title Quản Lý Nhân Viên Sequence Diagram
+
+actor Admin as A
+boundary "Employee Management UI" as EMUI
+control "Employee Management Controller" as EMC
+entity "Employee Database" as ED
+
+A -> EMUI: Truy cập giao diện quản lý nhân viên
+EMUI -> EMC: Yêu cầu quản lý nhân viên
+EMC -> ED: Truy vấn thông tin nhân viên
+ED --> EMC: Thông tin nhân viên
+EMC --> EMUI: Hiển thị thông tin nhân viên
+
+A -> EMUI: Quản lý thông tin nhân viên
+EMUI -> EMC: Yêu cầu quản lý thông tin nhân viên
+EMC -> ED: Quản lý thông tin nhân viên
+ED --> EMC: Xác nhận quản lý thông tin nhân viên
+EMC --> EMUI: Hiển thị thông báo quản lý thành công
+
+A -> EMUI: Tính lương cho nhân viên
+EMUI -> EMC: Yêu cầu tính lương
+EMC -> ED: Tính lương cho nhân viên
+ED --> EMC: Kết quả tính lương
+EMC --> EMUI: Hiển thị thông tin lương
+
+A -> EMUI: Phân quyền cho nhân viên
+EMUI -> EMC: Yêu cầu phân quyền
+EMC -> ED: Phân quyền cho nhân viên
+ED --> EMC: Xác nhận phân quyền
+EMC --> EMUI: Hiển thị thông báo phân quyền thành công
+
+A -> EMUI: Theo dõi giờ làm của nhân viên
+EMUI -> EMC: Yêu cầu theo dõi giờ làm
+EMC -> ED: Theo dõi giờ làm của nhân viên
+ED --> EMC: Thông tin giờ làm
+EMC --> EMUI: Hiển thị thông tin giờ làm
+
+A -> EMUI: Quản lý thuế
+EMUI -> EMC: Yêu cầu quản lý thuế
+EMC -> ED: Quản lý thuế
+ED --> EMC: Xác nhận quản lý thuế
+EMC --> EMUI: Hiển thị thông báo quản lý thuế thành công
+@enduml

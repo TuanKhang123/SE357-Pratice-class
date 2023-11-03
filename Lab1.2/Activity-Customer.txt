@@ -1,0 +1,45 @@
+@startuml
+|Khách hàng|
+start
+: Đã là thành viên?;
+if (Chưa là thành viên?) then (Chưa)
+  :Đăng ký tài khoản;a
+  :Đăng nhập;
+else (Đã là thành viên)
+  :Đăng nhập;
+endif
+if (Đăng nhập thành công?) then (Có)
+  :Quản lý thông tin khách hàng;
+  if (Có thông tin cá nhân?) then (Có)
+    :Chỉnh sửa thông tin cá nhân;
+  else (Không)
+    :cập nhật thông tin;
+  endif
+  :Xem thực đơn nhà hàng;
+  :Đặt đơn hàng?;
+  if (Thực hiện từ xa) then (Có)
+    :Đặt đơn hàng qua trang web;
+    :Quản lý đơn hàng đã đặt (Trạng thái, lịch sử, hủy đơn, đánh giá,..);
+  else (Không)
+    :Order trực tiếp tại nhà hàng;
+  endif
+  :Quản lý đặt bàn;
+  if (Thực hiện từ xa) then (Có)
+    :Đặt bàn qua trang web;
+    : Quản lý bàn đã đặt (chỉnh sửa thông tin, hủy bàn);
+  else (Không)
+    :Đặt bàn tại nhà hàng;
+  endif
+  :Quản lý thanh toán;
+  if (Thực hiện thanh toán?) then (Có)
+    :Tính toán tổng số tiền;
+    :Hỗ trợ thanh toán (Tiền mặt, thẻ tín dụng, ví điện tử);
+  else (Không)
+    :Tiếp tục hoặc thoát;
+  endif
+else (Không)
+  :Tiếp tục hoặc thoát;
+endif
+  stop
+|Khách hàng| --> end
+@enduml
