@@ -1,0 +1,16 @@
+@startuml
+actor Admin
+
+participant "Giao diện Quản lý" as GUI
+participant "Hệ thống quản lý bàn" as System
+
+Admin -> GUI : Chọn chức năng "Thêm bàn"
+GUI -> System : Yêu cầu thêm bàn
+alt Thành công
+    System -> GUI : Hiển thị thông báo thành công
+    GUI -> Admin : Hiển thị thông báo "Bàn đã được thêm"
+else Thất bại
+    System -> GUI : Hiển thị thông báo lỗi
+    GUI -> Admin : Hiển thị thông báo "Không thể thêm bàn"
+end
+@enduml

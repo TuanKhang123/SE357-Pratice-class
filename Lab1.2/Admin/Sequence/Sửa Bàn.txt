@@ -1,0 +1,17 @@
+@startuml
+participant "Admin" as Admin
+participant "Hệ thống quản lý" as System
+
+Admin -> System : Yêu cầu sửa thông tin bàn
+System -> System : Kiểm tra thông tin bàn có tồn tại không
+
+alt Nếu bàn tồn tại
+    System -> Admin : Hiển thị thông tin bàn
+    Admin -> System : Cập nhật thông tin mới
+    System -> System : Lưu thông tin bàn mới
+    System -> Admin : Xác nhận đã sửa
+else Nếu bàn không tồn tại
+    System -> Admin : Thông báo lỗi
+end
+
+@enduml

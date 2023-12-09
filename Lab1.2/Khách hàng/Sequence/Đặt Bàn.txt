@@ -1,0 +1,18 @@
+@startuml
+actor "Khách hàng" as KhachHang
+participant "Hệ thống" as HeThong
+
+KhachHang -> HeThong : Đăng nhập
+KhachHang -> HeThong : Click vào button "Đặt bàn"
+HeThong -> HeThong : Hiển thị màn hình "Đặt bàn"
+KhachHang -> KhachHang : Điền thông tin bàn và ấn vào "Hoàn tất"
+HeThong -> HeThong : Kiểm tra thông tin nhập vào
+
+alt if information is valid
+    HeThong -> HeThong : Lưu thông tin đặt bàn
+    HeThong -> KhachHang : Thông báo đặt bàn thành công
+else if information is not valid
+    HeThong -> KhachHang : Thông báo "Thông tin không hợp lệ"
+end
+
+@enduml

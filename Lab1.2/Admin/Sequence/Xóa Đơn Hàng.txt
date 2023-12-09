@@ -1,0 +1,20 @@
+@startuml
+participant "Giao Diện Quản Trị" as UI
+participant "Bộ Điều Khiển Đơn Hàng" as Controller
+database "Cơ Sở Dữ Liệu Đơn Hàng" as DB
+
+UI -> Controller : Xóa đơn hàng(Mã đơn hàng)
+activate Controller
+
+Controller -> DB : Truy vấn xóa đơn hàng(Mã đơn hàng)
+activate DB
+DB --> Controller : Thành công/Thất bại
+deactivate DB
+
+alt thành Công
+    Controller --> UI : Kết quả xóa(Thành công)
+else
+    Controller --> UI : Kết quả xóa(Thất bại)
+end
+deactivate Controller
+@enduml

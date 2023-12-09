@@ -1,0 +1,18 @@
+@startuml
+actor "Khách hàng" as KhachHang
+participant "Hệ thống" as HeThong
+
+KhachHang -> HeThong : Đăng nhập
+KhachHang -> HeThong : Chọn "Hủy đơn"
+HeThong -> HeThong : Kiểm tra đơn đã xác nhận?
+alt if order not confirmed
+    HeThong -> KhachHang : Hiển thị modal xác nhận xóa đơn
+    KhachHang -> HeThong : Chọn "Xác nhận"
+    HeThong -> HeThong : Xóa đơn hàng
+    HeThong -> KhachHang : Thông báo xóa thành công
+    HeThong -> HeThong : Thực hiện hoàn tiền cọc
+else if order confirmed
+    HeThong -> KhachHang : Hiển thị thông báo không thể xóa đơn
+end
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+actor Admin
+participant "Giao diện người dùng" as GUI
+participant "Hệ thống xử lý backend" as Backend
+database "Cơ sở dữ liệu" as Database
+
+Admin -> GUI : Chọn xem danh sách đơn hàng
+GUI -> Backend : Yêu cầu danh sách đơn hàng
+Backend -> Database : Truy vấn danh sách đơn hàng
+Database -> Backend : Trả về danh sách đơn hàng
+
+alt Danh sách đơn hàng không rỗng
+    Backend -> GUI : Hiển thị danh sách đơn hàng
+    GUI -> Admin : Hiển thị kết quả
+else Danh sách đơn hàng rỗng
+    Backend -> GUI : Thông báo không có đơn hàng
+    GUI -> Admin : Hiển thị thông báo
+end
+@enduml

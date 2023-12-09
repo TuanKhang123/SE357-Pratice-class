@@ -1,0 +1,22 @@
+@startuml
+
+actor Admin as "Quản lý"
+participant "Hệ thống đặt bàn" as System
+database "Cơ sở dữ liệu" as DB
+
+Admin -> System : Yêu cầu xem trạng thái bàn
+activate System
+
+System -> DB : Truy vấn trạng thái các bàn
+activate DB
+DB --> System : Trả về thông tin bàn
+deactivate DB
+
+alt Nếu có thông tin bàn
+    System --> Admin : Hiển thị trạng thái bàn
+else Không có thông tin bàn
+    System --> Admin : Hiển thị thông báo "Không có thông tin"
+end
+deactivate System
+
+@enduml
