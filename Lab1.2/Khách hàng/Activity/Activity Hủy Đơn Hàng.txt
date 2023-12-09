@@ -1,0 +1,23 @@
+@startuml
+start
+
+  repeat
+    :Đăng nhập;
+  repeat while (Đăng nhập thành công?) is (no)
+    ->yes;
+  if (Có đơn hàng để hủy?) then (yes)
+    :Chọn đơn hàng cần hủy;
+    if (Admin chưa xác nhận đơn hàng?) then (yes)
+      :Gửi yêu cầu hủy đơn hàng;
+      note right: Hệ thống xử lý yêu cầu hủy
+      :Hiển thị thông báo hủy thành công;
+      :Xử lý hoàn tiền (nếu đã thanh toán tiền cọc);
+    else (no)
+      :Hiển thị thông báo không thể hủy do đã được xác nhận;
+    endif
+  else (no)
+    :Hiển thị thông báo không có đơn hàng để hủy;
+  endif
+
+stop
+@enduml

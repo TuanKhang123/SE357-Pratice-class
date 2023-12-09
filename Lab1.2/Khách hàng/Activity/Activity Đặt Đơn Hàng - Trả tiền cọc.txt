@@ -1,0 +1,26 @@
+@startuml
+start
+
+repeat
+  :Đăng nhập;
+repeat while (Đăng nhập thành công?) is (no)
+->yes;
+
+:Xem danh sách thực đơn;
+:Thêm món vào đơn hàng;
+:Chọn đặt đơn;
+
+if (Đã đặt bàn?) then (yes)
+  repeat
+    :Thanh toán tiền cọc;
+  repeat while (Số tiền >= 1/2 giá trị đơn hàng?) is (no)
+  ->yes;
+
+  :Xác nhận và lưu đơn hàng;
+  : Thông báo đặt đơn thành công;
+else (no)
+  :Thông báo "Phải đặt bàn trước";
+endif
+
+stop
+@enduml
