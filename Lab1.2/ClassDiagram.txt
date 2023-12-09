@@ -1,0 +1,81 @@
+@startuml
+!define ClassDiagram
+!define AbstractClass abstract
+!define Interface interface
+
+class Person {
+  - Name: string
+  - Position: string
+  - Email: string
+  - Password: string
+  - ContactInfo: string
+}
+
+class Customer extends Person {
+  - CustomerID: int
+  + bookTable(): void
+  + editTableInfo(): void
+  + cancelTable(): void
+  + placeOrder(): void
+  + cancelOrder(): void
+  + makePayment(): void
+}
+
+class Admin extends Person {
+  - AdminID: int
+  + manageOrders(): void
+  + manageTables(): void
+}
+
+class Order {
+  - OrderID: int
+  - CustomerID: int
+  - Date: date
+  - Status: string
+  - TotalPrice: float
+  - Deposit: float
+}
+
+class OrderItem {
+  - ItemID: int
+  - OrderID: int
+  - ProductName: string
+  - Quantity: int
+  - Price: float
+  - Description: string
+}
+
+class Table {
+  - TableID: int
+  - Capacity: int
+  - Status: string
+}
+
+class Invoice {
+  - InvoiceID: int
+  - OrderID: int
+  - IssueDate: date
+  - TotalAmount: float
+}
+
+class InvoiceDetail {
+  - InvoiceDetailID: int
+  - InvoiceID: int
+  - ItemID: int
+  - Quantity: int
+  - UnitPrice: float
+  - Subtotal: float
+}
+
+Customer "1" *-- "0..*" Order : places
+
+Order "1" o- "0..*" OrderItem : contains
+Order "1" o- "0..1" Table : booked
+Order "1" -- "1" Invoice : billed
+
+Invoice "1" *-- "0..*" InvoiceDetail : itemized
+
+Admin "1" o- "0..*" Order : manages
+Admin "1" o- "0..*" Table : manages
+
+@enduml
