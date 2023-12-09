@@ -1,0 +1,29 @@
+@startuml
+
+left to right direction
+skinparam usecase {
+    BackgroundColor White
+    BorderColor Black
+}
+
+actor Admin as "Admin"
+
+Admin -- (Quản lý đơn hàng)
+Admin -- (Quản lý bàn)
+
+(Quản lý đơn hàng) <.. (Xem danh sách đơn hàng) : <<extends>>
+(Quản lý đơn hàng) <.. (Xóa đơn hàng) : <<extends>>
+(Quản lý đơn hàng) <.. (Sửa đơn hàng của khách hàng) : <<extends>>
+(Quản lý đơn hàng) <.. (Xác nhận đơn hàng) : <<extends>>
+(Quản lý đơn hàng) ..> (Đăng nhập) : <<includes>>
+
+(Quản lý bàn) <.. (Xem trạng thái bàn) : <<extends>>
+(Quản lý bàn) <.. (Thêm bàn) : <<extends>>
+(Quản lý bàn) <.. (Xóa bàn) : <<extends>>
+(Quản lý bàn) <.. (Sửa bàn) : <<extends>>
+(Quản lý bàn) ..> (Đăng nhập) : <<includes>>
+
+
+
+
+@enduml

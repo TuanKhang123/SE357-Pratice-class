@@ -1,0 +1,24 @@
+@startuml
+
+left to right direction
+skinparam usecase {
+    BackgroundColor White
+    BorderColor Black
+}
+
+actor Customer as "Khách hàng"
+
+
+Customer -- (Sửa thông tin đặt bàn)
+Customer -- (Đặt đơn hàng)
+Customer -- (Hủy đơn hàng)
+Customer -- (Hủy đặt bàn)
+
+(Đặt đơn hàng) ..> (Đặt bàn): <<includes>>
+(Đặt đơn hàng) ..> (Trả tiền cọc): <<includes>>
+(Sửa thông tin đặt bàn) ..> (Đăng nhập): <<includes>>
+(Đặt đơn hàng) ..> (Đăng nhập): <<includes>>
+(Hủy đơn hàng) ..> (Đăng nhập): <<includes>>
+(Hủy đặt bàn) ..> (Đăng nhập): <<includes>>
+
+@enduml
