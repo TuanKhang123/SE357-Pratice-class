@@ -1,0 +1,22 @@
+@startuml
+start
+
+  repeat
+  :Đăng nhập;
+  repeat while (Đăng nhập thành công?) is (no)
+    ->yes;
+
+  :Chọn đặt bàn;
+  
+  repeat
+    :Điền thông tin đặt bàn;
+    :Gửi yêu cầu đặt bàn;
+  repeat while (Đặt bàn thành công?) is (no)
+    ->yes;
+
+  :Xác nhận và lưu thông tin đặt bàn;
+  :Hiển thị thông báo đặt bàn thành công;
+
+
+stop
+@enduml
