@@ -1,0 +1,19 @@
+@startuml
+actor Admin
+participant "Hệ thống quản lý" as System
+database "Cơ sở dữ liệu" as Database
+
+Admin -> System : Gửi yêu cầu xóa bàn
+System -> Admin : Yêu cầu xác nhận
+Admin -> System : Xác nhận yêu cầu
+System -> Database : Kiểm tra bàn có tồn tại
+alt Bàn tồn tại
+    Database -> System : Xác nhận bàn tồn tại
+    System -> Database : Yêu cầu xóa bàn
+    Database -> System : Xác nhận xóa thành công
+    System -> Admin : Thông báo kết quả
+else Bàn không tồn tại
+    Database -> System : Thông báo bàn không tồn tại
+    System -> Admin : Thông báo lỗi
+end
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+actor "Quản Lý" as Manager
+participant "Giao Diện Quản Lý" as GUI
+participant "Hệ Thống" as System
+database "Cơ Sở Dữ Liệu" as DB
+
+Manager -> GUI : Đăng nhập Admin
+GUI -> System : Kiểm tra thông tin đăng nhập
+
+alt Đăng nhập thành công
+    System --> GUI : Cho phép truy cập
+    Manager -> GUI : Chọn chức năng Quản lý bàn
+    GUI -> System : Yêu cầu thông tin bàn
+    System -> DB : Truy vấn thông tin bàn
+    DB --> System : Trả về thông tin bàn
+    System --> GUI : Hiển thị danh sách bàn
+    Manager -> GUI : Chọn bàn cần thanh toán
+    GUI -> System : Yêu cầu thanh toán
+    System -> DB : Xử lý thanh toán
+    DB --> System : Tính số tiền cần thanh toán (Tổng hóa đơn - Tiền cọc)
+    System --> GUI : Trả về số tiền cần thanh toán
+    Manager -> GUI : In hóa đơn gửi khách hàng
+    GUI -> System : Cập nhật trạng thái bàn là "Trống"
+    System -> DB : Lưu trạng thái bàn "Trống"
+    DB --> System : Xác nhận lưu trạng thái
+    System --> GUI : Thông báo "Hoàn tất thanh toán"
+    GUI --> Manager : Hiển thị thông báo "Hoàn tất thanh toán"
+else Đăng nhập thất bại
+    System --> GUI : Thông báo lỗi đăng nhập
+    GUI --> Manager : Hiển thị thông báo lỗi đăng nhập
+end
+@enduml

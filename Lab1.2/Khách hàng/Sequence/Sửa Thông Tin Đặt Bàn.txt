@@ -1,0 +1,19 @@
+@startuml
+actor "Khách hàng" as KhachHang
+participant "Hệ thống" as HeThong
+
+KhachHang -> HeThong : Đăng nhập
+KhachHang -> HeThong : Chọn "Chỉnh sửa"
+HeThong -> HeThong : Hiển thị màn hình "Cập nhật thông tin đặt bàn"
+KhachHang -> KhachHang : Điền thông tin chỉnh sửa
+KhachHang -> HeThong : Chọn "Cập nhật"
+HeThong -> HeThong : Kiểm tra thông tin
+
+alt if information is valid
+    HeThong -> HeThong : Cập nhật thông tin mới
+    HeThong -> KhachHang : Thông báo cập nhật thông tin bàn thành công
+else if information is not valid
+    HeThong -> KhachHang : Thông báo lỗi yêu cầu nhập lại thông tin
+end
+
+@enduml
