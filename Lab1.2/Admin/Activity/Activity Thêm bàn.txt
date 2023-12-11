@@ -1,0 +1,21 @@
+@startuml
+start
+
+  repeat
+    :Đăng nhập Admin;
+  repeat while (Đăng nhập thành công?) is (no)
+    ->yes;
+
+   :Truy cập vào trang trạng quản lý đơn hàng;
+   :Chọn xóa đơn hàng cụ thế;
+
+   if (Đơn hàng có thể xóa?) then (true)
+   :Xóa đơn hàng;
+   :Thông báo xóa thành công;
+   else (flase)
+   :Hiển thị thông báo lỗi;
+   endif
+
+stop
+
+@enduml

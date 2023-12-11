@@ -1,0 +1,22 @@
+@startuml
+start
+
+  repeat
+    :Đăng nhập Admin;
+  repeat while (Đăng nhập thành công?) is (no)
+    ->yes;
+
+:Chọn chức năng Quản lý bàn;
+
+:Chọn bàn cần thanh toán;
+
+:Thanh toán số tiền còn lại; 
+note right: Tính số tiền cần thanh toán (Tổng hóa đơn - Tiền cọc)
+
+:In hóa đơn gửi khách hàng;
+
+:Chuyển bàn sang trạng thái "Trống";
+:Thông báo "Hoàn tất thanh toán";
+
+stop
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+start
+
+  repeat
+    :Đăng nhập Admin;
+  repeat while (Đăng nhập thành công?) is (no)
+    ->yes;
+   :Truy cập vào trang quản lý bàn;
+   
+    repeat
+    :Ấn "Xóa" ở một bàn cụ thể;
+     repeat while (Kiểm tra bàn có đơn hàng?) is (true: thông báo không được xóa)
+    ->false;
+   :Thực hiện xóa bàn;
+   :Thông báo xóa bàn thành công;
+stop
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+start
+
+  repeat
+    :Đăng nhập Admin;
+  repeat while (Đăng nhập thành công?) is (no)
+    ->yes;
+   :Truy cập vào trang quản lý bàn;
+   if (Có bàn không?) then (có)
+  :Hiển thị danh sách bàn;
+   else (không)
+  :Hiển thị thông báo và màn hình không có dữ liệu;
+   endif
+stop
+
+@enduml
