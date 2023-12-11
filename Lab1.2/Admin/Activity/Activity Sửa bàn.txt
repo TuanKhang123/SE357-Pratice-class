@@ -1,0 +1,19 @@
+@startuml
+start
+
+  repeat
+    :Đăng nhập Admin;
+  repeat while (Đăng nhập thành công?) is (no)
+    ->yes;
+   :Truy cập vào trang quản lý bàn;
+   :Chọn "Chỉnh sửa" một bàn cụ thể;
+   
+    repeat
+    :Điền thông tin và ấn "hoàn tất";
+     repeat while (Kiểm tra thông tin?) is (false)
+    ->true;
+   :Cập nhật thông tin bàn;
+   :Thông báo cập nhật thành công;
+stop
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+start
+
+  repeat
+    :Đăng nhập Admin;
+  repeat while (Đăng nhập thành công?) is (no)
+    ->yes;
+
+   :Nhập tên khách hàng cần tìm;
+   :Chọn "Tìm kiếm";
+
+   if (Có đơn hàng không?) then (có)
+  :Hiển thị danh sách đơn hàng theo tên;
+   else (không)
+  :Hiển thị thông báo không có dữ liệu;
+   endif
+
+:Kết thúc xem danh sách;
+stop
+
+@enduml

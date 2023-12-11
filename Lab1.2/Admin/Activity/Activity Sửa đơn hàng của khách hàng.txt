@@ -1,0 +1,21 @@
+@startuml
+start
+
+  repeat
+    :Đăng nhập Admin;
+  repeat while (Đăng nhập thành công?) is (no)
+    ->yes;
+
+   :Chọn "Cập nhật" một đơn hàng;
+   :Hiển thị trang cập nhật đơn hàng;
+   
+   repeat
+   :Điền thông tin cập nhật;
+   :Chọn "Hoàn tất";
+   repeat while (Thông tin hợp lệ?) is (không hợp lệ)
+   ->Hợp lệ;
+   :Cập nhật thông tin đơn hàng;
+   :Thông báo cập nhật đơn hàng thành công;
+stop
+
+@enduml

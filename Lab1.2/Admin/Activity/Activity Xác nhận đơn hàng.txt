@@ -1,0 +1,16 @@
+@startuml
+start
+
+  repeat
+    :Đăng nhập Admin;
+  repeat while (Đăng nhập thành công?) is (no)
+    ->yes;
+   repeat
+   :Chọn "Xác nhận" một đơn hàng;
+   repeat while (Thông tin đơn hàng hợp lệ và đã trả tiền cọc?) is (không hợp lệ)
+   ->Hợp lệ;
+   :Chuyển trạng thái đơn hàng sang "Đã xác nhận";
+   :Thông báo xác nhận đơn hàng thành công;
+stop
+
+@enduml
