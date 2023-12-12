@@ -5,27 +5,20 @@ start
     :Đăng nhập;
   repeat while (Đăng nhập thành công?) is (no)
     ->yes;
-  if (Có bàn?) then (yes)
+    : Chọn một bàn để hủy;
     if (Có đơn hàng trong bàn?) then (yes)
       if (Đơn hàng đã được xác nhận?) then (yes)
-        :Hiển thị thông báo không thể hủy bàn đã có đơn hàng được xác nhận;
+        :Hiển thị thông báo không thể hủy bàn;
       else (no)
         :Gửi yêu cầu hủy bàn và đơn hàng trong bàn đó;
-        note right: Hệ thống xử lý yêu cầu hủy và hoàn tiền cọc
         :Hiển thị thông báo hủy bàn và đơn hàng thành công;
         :Hệ thống sẽ xử lý hoàn tiền cọc;
       endif
     else (no)
-      if (Muốn xóa bàn không?) then (yes)
+        : Ấn xác nhận xóa;
         :Xóa thông tin bàn;
-        note right: Hệ thống xóa thông tin bàn
         :Hiển thị thông báo xóa bàn thành công;
-      else (no)
-      endif
     endif
-  else (no)
-    :Hiển thị thông báo không có bàn để hủy;
-  endif
 
 stop
 @enduml

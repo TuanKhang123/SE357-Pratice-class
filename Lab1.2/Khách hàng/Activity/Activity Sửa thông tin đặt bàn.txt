@@ -5,20 +5,19 @@ start
     :Đăng nhập;
   repeat while (Đăng nhập thành công?) is (no)
     ->yes;
-
-  if (Có bàn?) then (yes)
-    :Chọn bàn cần chỉnh sửa thông tin;
-      :Điền thông tin chỉnh sửa;
-      repeat
-        :Ấn "Cập nhật";
-      repeat while (Kiểm tra thông tin?) is (không hợp lệ)
-        ->hợp lệ;
-        :Lưu thông tin chỉnh sửa bàn;
-        :Hiển thị thông báo chỉnh sửa thành công;
-  else (no)
-    :Hiển thị thông báo không có bàn để chỉnh sửa;
-  endif
-
-
+    : Chọn một bàn để sửa thông tin;
+    if (Có đơn hàng trong bàn?) then (yes)
+      if (Đơn hàng đã được xác nhận?) then (yes)
+        :Hiển thị thông báo không thể sửa bàn;
+      else (no)
+        :Điền thông tin chỉnh sửa ;
+        :Ấn hoàn tất;
+        :Hiển thị thông báo cập nhật bàn thành công;
+      endif
+    else (no)
+        :Điền thông tin chỉnh sửa ;
+        :Ấn hoàn tất;
+        :Hiển thị thông báo cập nhật bàn thành công;
+    endif
 stop
 @enduml

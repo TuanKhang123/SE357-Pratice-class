@@ -16,6 +16,7 @@ start
    ->Hợp lệ;
    :Cập nhật thông tin đơn hàng;
    :Thông báo cập nhật đơn hàng thành công;
+   :Gửi thông tin chỉnh sửa đến người dùng;
 stop
 
 @enduml
