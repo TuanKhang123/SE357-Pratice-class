@@ -1,18 +1,25 @@
 @startuml
-actor "Khách hàng" as KhachHang
-participant "Hệ thống" as HeThong
+actor User as "Người dùng"
 
-KhachHang -> HeThong : Đăng nhập
-KhachHang -> HeThong : Chọn "Hủy đơn"
-HeThong -> HeThong : Kiểm tra đơn đã xác nhận?
-alt if order not confirmed
-    HeThong -> KhachHang : Hiển thị modal xác nhận xóa đơn
-    KhachHang -> HeThong : Chọn "Xác nhận"
-    HeThong -> HeThong : Xóa đơn hàng
-    HeThong -> KhachHang : Thông báo xóa thành công
-    HeThong -> HeThong : Thực hiện hoàn tiền cọc
-else if order confirmed
-    HeThong -> KhachHang : Hiển thị thông báo không thể xóa đơn
+User -> System: Đăng nhập
+alt Đăng nhập thành công
+    User -> System: Có đơn hàng để hủy?
+    alt Có đơn hàng
+        User -> System: Admin chưa xác nhận đơn hàng?
+        alt Admin chưa xác nhận
+            User -> System: Gửi yêu cầu hủy đơn hàng
+            System -> System: Hệ thống xử lý yêu cầu hủy
+            System --> User: Hiển thị thông báo hủy thành công
+            System -> System: Xử lý hoàn tiền (nếu đã thanh toán tiền cọc)
+        else Admin đã xác nhận
+            System --> User: Hiển thị thông báo không thể hủy đơn đã được xác nhận
+        end
+    else Không có đơn hàng
+        System --> User: Hiển thị thông báo không có đơn hàng để hủy
+    end
+else Đăng nhập không thành công
+    System --> User: Kết thúc quy trình
 end
 
 @enduml
+
