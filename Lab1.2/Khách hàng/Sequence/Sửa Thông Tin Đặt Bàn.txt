@@ -1,19 +1,24 @@
 @startuml
-actor "Khách hàng" as KhachHang
-participant "Hệ thống" as HeThong
+actor User as "Người dùng"
 
-KhachHang -> HeThong : Đăng nhập
-KhachHang -> HeThong : Chọn "Chỉnh sửa"
-HeThong -> HeThong : Hiển thị màn hình "Cập nhật thông tin đặt bàn"
-KhachHang -> KhachHang : Điền thông tin chỉnh sửa
-KhachHang -> HeThong : Chọn "Cập nhật"
-HeThong -> HeThong : Kiểm tra thông tin
-
-alt if information is valid
-    HeThong -> HeThong : Cập nhật thông tin mới
-    HeThong -> KhachHang : Thông báo cập nhật thông tin bàn thành công
-else if information is not valid
-    HeThong -> KhachHang : Thông báo lỗi yêu cầu nhập lại thông tin
+User -> System: Đăng nhập
+alt Đăng nhập thành công
+    User -> System: Chọn một bàn để sửa thông tin
+    alt Có đơn hàng trong bản
+        alt Đơn hàng đã được xác nhận
+            System --> User: Hiển thị thông báo không thể sửa bản
+        else Đơn hàng chưa được xác nhận
+            User -> System: Điền thông tin chỉnh sửa
+            User -> System: Ấn hoàn tất
+            System --> User: Hiển thị thông báo cập nhật bản thành công
+        end
+    else Không có đơn hàng trong bản
+        User -> System: Điền thông tin chỉnh sửa
+        User -> System: Ấn hoàn tất
+        System --> User: Hiển thị thông báo cập nhật bản thành công
+    end
+else Đăng nhập không thành công
+    User -> System: Quay lại đăng nhập
 end
 
 @enduml

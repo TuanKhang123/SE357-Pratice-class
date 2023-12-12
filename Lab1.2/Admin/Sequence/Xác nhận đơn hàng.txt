@@ -1,0 +1,17 @@
+@startuml
+actor NgườiDùng as "Admin"
+
+NgườiDùng -> HệThống as "Hệ thống": Đăng nhập
+alt Đăng nhập thành công
+    NgườiDùng -> HệThống: Chọn "Xác nhận" một đơn hàng
+    alt Thông tin đơn hàng hợp lệ và đã được thanh toán
+        HệThống -> HệThống: Chuyển trạng thái đơn hàng sang "Đã xác nhận"
+        HệThống -> NgườiDùng: Thông báo xác nhận đơn hàng thành công
+    else Thông tin đơn hàng không hợp lệ hoặc chưa được thanh toán
+        HệThống -> NgườiDùng: Yêu cầu xác nhận lại đơn hàng
+    end
+else Đăng nhập không thành công
+    HệThống -> NgườiDùng: Thông báo đăng nhập không thành công và yêu cầu đăng nhập lại
+end
+
+@enduml

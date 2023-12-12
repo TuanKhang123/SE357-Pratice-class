@@ -1,0 +1,21 @@
+@startuml
+actor Admin
+actor User as "Người dùng"
+
+Admin -> System: Đăng nhập Admin
+alt Đăng nhập thành công
+    Admin -> System: Chọn "Cập nhật" một đơn hàng
+    System -> System: Hiển thị trang cập nhật đơn hàng
+    loop Thông tin cập nhật chưa hợp lệ
+        Admin -> System: Điền thông tin cập nhật
+        Admin -> System: Chọn "Hoàn tất"
+        System -> System: Kiểm tra thông tin hợp lệ
+    end
+    System -> System: Cập nhật thông tin đơn hàng
+    System --> Admin: Thông báo cập nhật đơn hàng thành công
+    System -> User: Gửi thông báo đến người dùng
+else Đăng nhập không thành công
+    Admin -> System: Quay lại đăng nhập
+end
+
+@enduml

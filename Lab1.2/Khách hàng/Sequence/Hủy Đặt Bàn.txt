@@ -1,24 +1,24 @@
 @startuml
-actor "Khách hàng" as KhachHang
-participant "Hệ thống" as HeThong
+actor User as "Người dùng"
 
-KhachHang -> HeThong : Đăng nhập
-KhachHang -> HeThong : Chọn "Xóa" trong trang quản lý đặt bàn
-KhachHang -> HeThong : Chọn "Xác nhận"
-HeThong -> HeThong : Kiểm tra bàn có đơn?
-
-alt reservation exists
-    HeThong -> HeThong : Kiểm tra đơn đã xác nhận?
-    alt not confirmed
-        HeThong -> KhachHang : Hiện thị modal xác nhận xóa bàn
-    else confirmed
-        HeThong -> KhachHang : Hiện thị thông báo không thể xóa bàn
+User -> System: Đăng nhập
+alt Đăng nhập thành công
+    User -> System: Chọn một bản để hủy
+    alt Có đơn hàng trong bản
+        alt Đơn hàng đã được xác nhận
+            System --> User: Hiển thị thông báo không thể hủy bản
+        else Đơn hàng chưa được xác nhận
+            User -> System: Gửi yêu cầu hủy bản và đơn hàng trong bản đó
+            System --> User: Hiển thị thông báo hủy bản và đơn hàng thành công
+            System -> System: Hệ thống sẽ xử lý hoàn tiền cọc
+        end
+    else Không có đơn hàng trong bản
+        User -> System: Ấn xác nhận xóa
+        System -> System: Xóa thông tin bản
+        System --> User: Hiển thị thông báo xóa bản thành công
     end
-    HeThong -> HeThong : Xóa thông tin bàn
-    HeThong -> HeThong : Xóa đơn hàng trong bàn và hoàn tiền (nếu có)
-    HeThong -> KhachHang : Thông báo xóa thành công
-else no reservation
-    HeThong -> KhachHang : Thông báo không có đơn để xóa
+else Đăng nhập không thành công
+    User -> System: Quay lại đăng nhập
 end
 
 @enduml
