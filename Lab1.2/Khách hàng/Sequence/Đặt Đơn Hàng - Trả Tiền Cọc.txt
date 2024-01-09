@@ -3,24 +3,36 @@ actor "Khách hàng" as KhachHang
 participant "Hệ thống" as HeThong
 
 KhachHang -> HeThong : Đăng nhập
+activate HeThong
+HeThong --> KhachHang : Xác nhận đăng nhập
+deactivate HeThong
+
 KhachHang -> HeThong : Chọn "Đặt món"
+activate HeThong
 HeThong -> HeThong : Hiển thị màn hình "Đặt món"
+HeThong --> KhachHang : Màn hình "Đặt món"
+deactivate HeThong
+
 KhachHang -> KhachHang : Thêm món ăn vào đơn hàng
 KhachHang -> HeThong : Chọn "Đặt đơn"
+activate HeThong
 
 HeThong -> HeThong : Số lượng chọn <= số lượng món còn trong kho?
 alt if quantity is not sufficient
-    HeThong -> KhachHang : Hiển thị thông báo không đủ số lượng
+    HeThong --> KhachHang : Hiển thị thông báo không đủ số lượng
 else if quantity is sufficient
     HeThong -> HeThong : Hiển thị màn hình "Thông tin thanh toán"
+    HeThong --> KhachHang : Màn hình "Thông tin thanh toán"
+    deactivate HeThong
     KhachHang -> HeThong : Thanh toán cọc và ấn "Hoàn tất"
+    activate HeThong
     HeThong -> HeThong : Kiểm tra thanh toán "tiền cọc >= 1/2 tổng đơn?"
     alt if deposit is not sufficient
-        HeThong -> KhachHang : Thông báo "tiền cọc phải >= 1/2 tổng đơn"
+        HeThong --> KhachHang : Thông báo "tiền cọc phải >= 1/2 tổng đơn"
     else if deposit is sufficient
         HeThong -> HeThong : Lưu đơn hàng
-        HeThong -> KhachHang : Thông báo đặt hàng thành công
+        HeThong --> KhachHang : Thông báo đặt hàng thành công
     end
 end
-
+deactivate HeThong
 @enduml

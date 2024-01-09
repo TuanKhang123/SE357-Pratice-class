@@ -3,16 +3,26 @@ actor "Khách hàng" as KhachHang
 participant "Hệ thống" as HeThong
 
 KhachHang -> HeThong : Đăng nhập
+activate HeThong
+HeThong --> KhachHang : Xác nhận đăng nhập
+deactivate HeThong
+
 KhachHang -> HeThong : Click vào button "Đặt bàn"
-HeThong -> HeThong : Hiển thị màn hình "Đặt bàn"
+activate HeThong
+HeThong --> KhachHang : Hiển thị màn hình "Đặt bàn"
+deactivate HeThong
+
 KhachHang -> KhachHang : Điền thông tin bàn và ấn vào "Hoàn tất"
+KhachHang -> HeThong : Gửi thông tin đặt bàn
+activate HeThong
 HeThong -> HeThong : Kiểm tra thông tin nhập vào
 
 alt if information is valid
     HeThong -> HeThong : Lưu thông tin đặt bàn
-    HeThong -> KhachHang : Thông báo đặt bàn thành công
+    HeThong --> KhachHang : Thông báo đặt bàn thành công
 else if information is not valid
-    HeThong -> KhachHang : Thông báo "Thông tin không hợp lệ"
+    HeThong --> KhachHang : Thông báo "Thông tin không hợp lệ"
 end
 
+deactivate HeThong
 @enduml

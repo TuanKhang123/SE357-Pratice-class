@@ -1,24 +1,59 @@
 @startuml
-actor User as "Người dùng"
+actor "Người dùng" as User
+participant "Giao diện người dùng" as GUI
+participant "Hệ thống xử lý backend" as Backend
 
-User -> System: Đăng nhập
+User -> GUI : Đăng nhập
+activate GUI
 alt Đăng nhập thành công
-    User -> System: Chọn một bản để hủy
+    GUI -> Backend : Yêu cầu xác nhận đăng nhập
+    activate Backend
+    Backend --> GUI : Xác nhận đăng nhập thành công
+    deactivate Backend
+
+    GUI --> User : Hiển thị giao diện chính
+    deactivate GUI
+    User -> GUI : Chọn một bản để hủy
+    activate GUI
+    GUI -> Backend : Kiểm tra thông tin bản và đơn hàng
+    activate Backend
+
     alt Có đơn hàng trong bản
         alt Đơn hàng đã được xác nhận
-            System --> User: Hiển thị thông báo không thể hủy bản
+            Backend --> GUI : Thông báo không thể hủy bản
+            deactivate Backend
+            GUI --> User : Hiển thị thông báo không thể hủy bản
+            deactivate GUI
         else Đơn hàng chưa được xác nhận
-            User -> System: Gửi yêu cầu hủy bản và đơn hàng trong bản đó
-            System --> User: Hiển thị thông báo hủy bản và đơn hàng thành công
-            System -> System: Hệ thống sẽ xử lý hoàn tiền cọc
+            Backend --> GUI : Cho phép hủy bản và đơn hàng
+            deactivate Backend
+            GUI --> User : Hiển thị thông báo hủy bản và đơn hàng thành công
+            deactivate GUI
+            User -> GUI : Gửi yêu cầu hủy bản và đơn hàng trong bản đó
+            activate GUI
+            GUI -> Backend : Xử lý hủy bản và hoàn tiền cọc
+            activate Backend
+            Backend --> GUI : Xác nhận hủy bản và hoàn tiền cọc
+            deactivate Backend
+            GUI --> User : Hiển thị thông báo hủy bản và hoàn tiền cọc thành công
+            deactivate GUI
         end
     else Không có đơn hàng trong bản
-        User -> System: Ấn xác nhận xóa
-        System -> System: Xóa thông tin bản
-        System --> User: Hiển thị thông báo xóa bản thành công
+        Backend --> GUI : Cho phép xóa bản
+        deactivate Backend
+        GUI --> User : Hiển thị xác nhận xóa bản
+        deactivate GUI
+        User -> GUI : Ấn xác nhận xóa
+        activate GUI
+        GUI -> Backend : Xóa thông tin bản
+        activate Backend
+        Backend --> GUI : Xác nhận xóa bản thành công
+        deactivate Backend
+        GUI --> User : Hiển thị thông báo xóa bản thành công
+        deactivate GUI
     end
 else Đăng nhập không thành công
-    User -> System: Quay lại đăng nhập
+    GUI --> User : Thông báo đăng nhập không thành công và yêu cầu quay lại đăng nhập
+    deactivate GUI
 end
-
 @enduml

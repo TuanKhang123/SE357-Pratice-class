@@ -1,25 +1,60 @@
 @startuml
 actor User as "Người dùng"
+participant "Giao diện người dùng" as GUI
+participant "Hệ thống xử lý backend" as Backend
+database "Cơ sở dữ liệu" as Database
 
-User -> System: Đăng nhập
+User -> GUI: Đăng nhập
+activate GUI
+GUI -> Backend: Yêu cầu xác thực đăng nhập
+activate Backend
+Backend -> Database: Kiểm tra thông tin người dùng
+activate Database
+Database --> Backend: Trả về kết quả xác thực
+deactivate Database
+
 alt Đăng nhập thành công
-    User -> System: Có đơn hàng để hủy?
-    alt Có đơn hàng
-        User -> System: Admin chưa xác nhận đơn hàng?
-        alt Admin chưa xác nhận
-            User -> System: Gửi yêu cầu hủy đơn hàng
-            System -> System: Hệ thống xử lý yêu cầu hủy
-            System --> User: Hiển thị thông báo hủy thành công
-            System -> System: Xử lý hoàn tiền (nếu đã thanh toán tiền cọc)
-        else Admin đã xác nhận
-            System --> User: Hiển thị thông báo không thể hủy đơn đã được xác nhận
-        end
-    else Không có đơn hàng
-        System --> User: Hiển thị thông báo không có đơn hàng để hủy
+    Backend --> GUI: Xác nhận đăng nhập thành công
+    deactivate Backend
+    GUI --> User: Hiển thị màn hình chính
+    deactivate GUI
+    
+    User -> GUI: Yêu cầu xem danh sách đơn hàng
+    activate GUI
+    GUI -> Backend: Yêu cầu danh sách đơn hàng
+    activate Backend
+    Backend -> Database: Truy vấn danh sách đơn hàng
+    activate Database
+    Database --> Backend: Trả về danh sách đơn hàng
+    deactivate Database
+
+    alt Danh sách đơn hàng không rỗng
+        Backend --> GUI: Hiển thị danh sách đơn hàng
+        deactivate Backend
+        GUI --> User: Cho phép người dùng chọn đơn hàng để hủy
+        deactivate GUI
+        User -> GUI: Chọn hủy đơn hàng
+        activate GUI
+        GUI -> Backend: Yêu cầu hủy đơn hàng
+        activate Backend
+        Backend -> Database: Xử lý yêu cầu hủy
+        activate Database
+        Database --> Backend: Cập nhật trạng thái đơn hàng
+        deactivate Database
+        Backend --> GUI: Trả về kết quả hủy đơn hàng
+        deactivate Backend
+        GUI --> User: Hiển thị thông báo kết quả hủy
+        deactivate GUI
+    else Danh sách đơn hàng rỗng
+        Backend --> GUI: Thông báo không có đơn hàng để hủy
+        deactivate Backend
+        GUI --> User: Hiển thị thông báo
+        deactivate GUI
     end
 else Đăng nhập không thành công
-    System --> User: Kết thúc quy trình
+    Backend --> GUI: Thông báo đăng nhập không thành công
+    deactivate Backend
+    GUI --> User: Hiển thị thông báo
+    deactivate GUI
 end
-
 @enduml
-

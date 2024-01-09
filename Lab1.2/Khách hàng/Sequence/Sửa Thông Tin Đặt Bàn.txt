@@ -2,23 +2,33 @@
 actor User as "Người dùng"
 
 User -> System: Đăng nhập
+activate System
 alt Đăng nhập thành công
+    activate User
     User -> System: Chọn một bàn để sửa thông tin
+    activate System
     alt Có đơn hàng trong bản
         alt Đơn hàng đã được xác nhận
             System --> User: Hiển thị thông báo không thể sửa bản
+            deactivate System
         else Đơn hàng chưa được xác nhận
             User -> System: Điền thông tin chỉnh sửa
+            activate System
             User -> System: Ấn hoàn tất
             System --> User: Hiển thị thông báo cập nhật bản thành công
+            deactivate System
         end
     else Không có đơn hàng trong bản
         User -> System: Điền thông tin chỉnh sửa
+        activate System
         User -> System: Ấn hoàn tất
         System --> User: Hiển thị thông báo cập nhật bản thành công
+        deactivate System
     end
+    deactivate User
 else Đăng nhập không thành công
     User -> System: Quay lại đăng nhập
+    deactivate System
 end
-
+deactivate User
 @enduml
